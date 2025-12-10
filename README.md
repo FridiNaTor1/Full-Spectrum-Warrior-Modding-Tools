@@ -1,5 +1,25 @@
 # This is a all-in-one tool for modding Full Spectrum Warrior
 This tool is written in Python 3 and PyQt5, so those are your dependencies. If you got them installed just run: python fsw_mod_kit.py
+
+## Native CLI build (Windows & Linux)
+A portable C++17/20 command-line build is included for users who prefer a self-contained binary. It re-implements the core patchers (DLL tweaks, PAK mission failure removal, ammo 999, and `Resolution.cfg` writing).
+
+### Building with CMake
+```bash
+cmake -S . -B build
+cmake --build build --config Release
+```
+
+On Windows, run the same commands in a Visual Studio Developer Prompt to produce `fsw_mod_kit_cli.exe`.
+
+### CLI usage
+```bash
+./build/fsw_mod_kit_cli patch-no-downs /path/to/FSW.dll
+./build/fsw_mod_kit_cli patch-openspy /path/to/FSW.dll
+./build/fsw_mod_kit_cli patch-no-mission-failures /path/to/Chapters
+./build/fsw_mod_kit_cli patch-ammo-999 /path/to/Chapters
+./build/fsw_mod_kit_cli write-resolution /game/install 1920 1080
+```
 # Features
 A string modification to FSW.dll to redriect GameSpy to OpenSpy, restoring Online Functionality.
 
