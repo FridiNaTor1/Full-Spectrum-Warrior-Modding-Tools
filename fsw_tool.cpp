@@ -124,7 +124,7 @@ int patch_no_mission_failures_in_pak(const fs::path &pak_path) {
 
 int patch_ammo_999_in_pak(const fs::path &pak_path) {
     try {
-        RulesModel model(pak_path);
+        fsw::RulesModel model(pak_path);
         int changed = 0;
         for (const auto &sec : model.sections()) {
             for (const auto &key : sec.fields_order) {
@@ -202,7 +202,7 @@ void DescriptorModel::parse() {
 
     std::regex desc_re(R"((?s)\[(C\w+Descriptor)\](.*?)/end)");
     std::regex kv_re(
-        R"(([A-Za-z0-9_]+)\s*=\s*(?:"([^"]*?)"|([^\s\r\n;"\x00]+)))");
+        "([A-Za-z0-9_]+)\\s*=\\s*(?:\"([^\"]*?)\"|([^\\s\\r\\n;\"\\x00]+))");
 
     std::size_t index = 0;
     for (std::sregex_iterator it(data.begin(), data.end(), desc_re), end; it != end; ++it) {
