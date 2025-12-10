@@ -1,16 +1,20 @@
 #include "fsw_tool.hpp"
 
+#include <QAction>
 #include <QApplication>
 #include <QColorDialog>
+#include <QComboBox>
 #include <QFileDialog>
 #include <QFormLayout>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
+#include <QInputDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QListWidget>
 #include <QMainWindow>
+#include <QMenuBar>
 #include <QMessageBox>
 #include <QPlainTextEdit>
 #include <QPushButton>
@@ -19,8 +23,7 @@
 #include <QSlider>
 #include <QSplitter>
 #include <QSpinBox>
-#include <QComboBox>
-#include <QInputDialog>
+#include <QToolBar>
 #include <QTreeWidget>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -296,7 +299,8 @@ class DescriptorEditorWindow : public QMainWindow {
         }
         auto *item = items.first();
         int idx = item->data(0, Qt::UserRole).toInt();
-        editor_->setDescriptor(&model_->descriptors().at(static_cast<std::size_t>(idx)), model_.get());
+        editor_->setDescriptor(&model_->mutable_descriptors().at(static_cast<std::size_t>(idx)),
+                               model_.get());
     }
 
     void save() {
@@ -427,8 +431,8 @@ class RulesEditorWindow : public QMainWindow {
             editor_->setSection(nullptr, nullptr);
             return;
         }
-        auto &sec = model_->sections().at(static_cast<std::size_t>(row));
-        editor_->setSection(const_cast<fsw::RuleSection *>(&sec), model_.get());
+        auto &sec = model_->mutable_sections().at(static_cast<std::size_t>(row));
+        editor_->setSection(&sec, model_.get());
     }
 
     void save() {

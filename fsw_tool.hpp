@@ -28,6 +28,7 @@ class DescriptorModel {
 
     const std::filesystem::path &path() const { return pak_path_; }
     const std::vector<DescriptorRecord> &descriptors() const { return descriptors_; }
+    std::vector<DescriptorRecord> &mutable_descriptors() { return descriptors_; }
     std::set<std::string> options_for_key(const std::string &key) const;
 
     void replace_key(DescriptorRecord &rec, const std::string &key,
@@ -62,6 +63,7 @@ class RulesModel {
 
     const std::filesystem::path &path() const { return pak_path_; }
     const std::vector<RuleSection> &sections() const { return sections_; }
+    std::vector<RuleSection> &mutable_sections() { return sections_; }
 
     void update_field(RuleField &field, const std::string &new_value);
     RuleField *find_field(const std::string &section, const std::string &key);
